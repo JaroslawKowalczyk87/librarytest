@@ -191,6 +191,7 @@ public static void main(String[] args) {
 	l1.printAllBooks();
 	// all the books by Adam Mickiewicz
 	l1.searchBooks("*", "Adam Mickiewicz", "*");
+	l1.addBook("Dziennik 1954", "Leopold Tyrmand", 1990);
 	
 }
 	
