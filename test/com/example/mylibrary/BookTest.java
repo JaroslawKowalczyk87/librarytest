@@ -1,8 +1,10 @@
-package myLibrary;
+package com.example.mylibrary;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import com.example.mylibrary.Book;
 
 public class BookTest {
 
