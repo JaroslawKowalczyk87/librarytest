@@ -6,11 +6,11 @@ import org.junit.Test;
 
 import com.example.mylibrary.Book;
 
-class BookTest {
+public class BookTest {
 
 	// testing the creator of the book
 	@Test
-	private void testBook() {
+	public void testBook() {
 		Book book = new Book("Lalka", "Boleslaw Prus", 1890);
 		assertEquals("Lalka", book.getTitle());
 		assertEquals("Boleslaw Prus", book.getAuthor());

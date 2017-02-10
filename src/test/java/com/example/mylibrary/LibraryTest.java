@@ -6,9 +6,9 @@ import org.junit.Test;
 
 import com.example.mylibrary.Library;
 
-class LibraryTest {
+public class LibraryTest {
 
-	private void setup(Library l1){
+	void setup(Library l1){
 		// adding few books to the library so we can test it
 		l1.addBook("Lalka", "Boleslaw Prus", 1890);
 		l1.addBook("Ogniem i mieczem", "Henryk Sienkiewicz", 1900);
@@ -19,7 +19,7 @@ class LibraryTest {
 	}
 	
 	@Test
-	private void testLibrary() {
+	public void testLibrary() {
 		Library l1 = new Library();
 		// testing if the new Library has no books in it
 		assertEquals(l1.books.size(),0);
@@ -27,7 +27,7 @@ class LibraryTest {
 
 
 	@Test
-	private void testAddBook() {
+	public void testAddBook() {
 		Library l1 = new Library();
 		setup(l1);
 		assertEquals(6,l1.books.size());
@@ -37,7 +37,7 @@ class LibraryTest {
 	}
 
 	@Test
-	private void testRemoveBook() {
+	public void testRemoveBook() {
 		Library l1 = new Library();
 		setup(l1);
 		assertEquals(6,l1.books.size());
