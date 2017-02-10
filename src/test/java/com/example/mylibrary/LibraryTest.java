@@ -22,7 +22,7 @@ public class LibraryTest {
 	public void testLibrary() {
 		Library l1 = new Library();
 		// testing if the new Library has no books in it
-		assertEquals(l1.books.size(),0);
+		assertEquals(l1.getBooks().size(),0);
 	}
 
 
@@ -30,20 +30,20 @@ public class LibraryTest {
 	public void testAddBook() {
 		Library l1 = new Library();
 		setup(l1);
-		assertEquals(6,l1.books.size());
+		assertEquals(6, l1.getBooks().size());
 		l1.addBook("Dziennik 1954", "Leopold Tyrmand", 1989);
 		// after adding a book the size of the library should be bigger by one
-		assertEquals(7,l1.books.size());
+		assertEquals(7, l1.getBooks().size());
 	}
 
 	@Test
 	public void testRemoveBook() {
 		Library l1 = new Library();
 		setup(l1);
-		assertEquals(6,l1.books.size());
-		l1.removeBook(l1.books.get(4).getId());
+		assertEquals(6, l1.getBooks().size());
+		l1.removeBook(l1.getBooks().get(4).getId());
 		// after removing a book the size of the library should be smaller by one
-		assertEquals(5,l1.books.size());	
+		assertEquals(5, l1.getBooks().size());
 	}
 
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Library {
 
 	// "books" field is the list of all the books in our library
-	ArrayList<Book> books;
+	private ArrayList<Book> books;
 	private static int idCounter = 0;
 	
 	public Library() {
@@ -164,5 +164,8 @@ public class Library {
 			printBookList(books2);
 		}
 	}
-	
+
+	public ArrayList<Book> getBooks() {
+		return books;
+	}
 }
