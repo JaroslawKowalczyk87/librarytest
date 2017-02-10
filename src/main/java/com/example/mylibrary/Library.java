@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Library {
 
 	// "books" field is the list of all the books in our library
-	public ArrayList<Book> books;
-	static int idCounter = 0;
+	ArrayList<Book> books;
+	private static int idCounter = 0;
 	
 	public Library() {
 		// creating an empty library, with no books
@@ -14,7 +14,7 @@ public class Library {
 	}
 	
 	// incrementing counter and giving the incremented value as an ID
-	public static Integer getNewID() {
+	static Integer getNewID() {
 		idCounter++;
 		return idCounter;
 	}
@@ -32,7 +32,7 @@ public class Library {
 		// so I'm creating a list of the elements to remove
 		ArrayList<Book> books2 = new ArrayList<Book>();
 		for (Book book : books) {
-			if (book.id == id){
+			if (book.getId() == id){
 				books2.add(book);
 				// ID is distinct, so we can break the loop,
 				// because the list will always have no more than one element
@@ -47,17 +47,17 @@ public class Library {
 		// the tick value will change, if there is a book with this id
 		int tick = 0;
 		for (Book book : books) {
-			if (book.id == id){
-				if (book.reader == null){
-					book.reader = p;
-					System.out.println(book.reader + " has borrowed the book with id" + id);
+			if (book.getId() == id){
+				if (book.getReader() == null){
+					book.setReader(p);
+					System.out.println(book.getReader() + " has borrowed the book with id" + id);
 					tick = 1;
 				}
 				// if the book is already lent to someone, the message is shown
 				else {
 					tick = 1;
 					System.out.println("Sorry, the book is already lent to " 
-				+ book.reader);
+				+ book.getReader());
 				}
 			}
 		}
@@ -70,18 +70,18 @@ public class Library {
 
 	// this function can print out the details of books on any book list
 	// we'll use it in few further functions
-	public void printBookList(ArrayList<Book> list){
+	private void printBookList(ArrayList<Book> list){
 		for (Book book: list){
-			System.out.println("Title: " + book.title + ", Author: " + book.author +
-			", Year: " + book.year + ", Availability: " + book.isAvailable());
+			System.out.println("Title: " + book.getTitle() + ", Author: " + book.getAuthor() +
+			", Year: " + book.getYear() + ", Availability: " + book.isAvailable());
 		}
 	}	
 	
 	// function that displays the details of a book given its id
-	public void printInformation (Integer id){
+	public void printInformation(Integer id){
 		ArrayList<Book> books2 = new ArrayList<Book>();
 		for (Book book : books) {
-			if (book.id == id){
+			if (book.getId() == id){
 				books2.add(book);
 				// ID is distinct, so we can break the loop,
 				// because the list will always have no more than one element
@@ -93,12 +93,12 @@ public class Library {
 	}
 	
 	// function that displays the details of all the books in the library
-	public void printAllBooks (){
+	public void printAllBooks(){
 		// we'll have two lists: available books and the books that are lent
 		ArrayList<Book> booksaval = new ArrayList<Book>();
 		ArrayList<Book> bookslent = new ArrayList<Book>();
 		for (Book book : this.books) {
-			if (book.reader == null){
+			if (book.getReader() == null){
 				booksaval.add(book);
 			}
 			else{
@@ -113,7 +113,7 @@ public class Library {
 		printBookList(bookslent);
 	}
 	
-	public void searchBooks (String title, String author, String year){
+	public void searchBooks(String title, String author, String year) {
 		ArrayList<Book> books2 = new ArrayList<Book>();
 		// creating a list on which we'll gather all the books that fail to meet
 		// at least one search criterium
@@ -121,78 +121,48 @@ public class Library {
 		//copying a list of all books from which we'll delete the books that
 		//don't match the search criteria
 		books2 = this.books;
-		
+
 		// a star is given as an argument, when the user doesn't want to search
 		// using that field (e.g. is interested only in year, not in the author
-		if (title != "*"){
+		if (title != "*") {
 			// we're searching thorugh the books to see, if there are any that
 			// fail to meet the criteria
 			for (Book book : books2) {
-				if (book.title != title){
+				if (book.getTitle() != title) {
 					bookstoremove.add(book);
 				}
 			}
 			books2.removeAll(bookstoremove);
 		}
 
-		if (author != "*"){
+		if (author != "*") {
 			for (Book book : books2) {
-				if (book.author != author){
-					bookstoremove.add(book);			}
+				if (book.getAuthor() != author) {
+					bookstoremove.add(book);
+				}
 			}
 			// I'm removing the books three times, because that saves us from
 			// going through the whole list few times
 			books2.removeAll(bookstoremove);
 		}
 
-		if (year != "*"){
+		if (year != "*") {
 			for (Book book : books2) {
 				// I have to take the argument as a string, so the star can be used
-				if (book.year != Integer.parseInt(year)){
-					bookstoremove.add(book);			}
+				if (book.getYear() != Integer.parseInt(year)) {
+					bookstoremove.add(book);
+				}
 			}
 			books2.removeAll(bookstoremove);
-		}				
+		}
 		// printing out the books that meet the search criteria
 		// or displaying appropriate message, when no books where found
-		if (books2.size()==0){
+		if (books2.size() == 0) {
 			System.out.println("No books that meet the criteria.");
-		}
-		else{
-		System.out.println("Books that meet the criteria:");
-		printBookList(books2);
+		} else {
+			System.out.println("Books that meet the criteria:");
+			printBookList(books2);
 		}
 	}
-	
-public static void main(String[] args) {
-	// we'll show how the program works
-	// creating a library
-	Library l1 = new Library();
-	// adding a few books
-	l1.addBook("Lalka", "Boleslaw Prus", 1890);
-	l1.addBook("Ogniem i mieczem", "Henryk Sienkiewicz", 1900);
-	l1.addBook("Nad Niemnem", "Eliza Orzeszkowa", 1895);
-	// showing how it looks
-	l1.printAllBooks();
-	l1.addBook("Morfina", "Szczepan Twardoch", 2015);
-	l1.addBook("Ballady i Romanse", "Adam Mickiewicz", 1822);
-	l1.addBook("Pan Tadeusz", "Adam Mickiewicz", 1830);
-	// and now
-	l1.printAllBooks();
-	l1.lendBook(3, "Pawe�");
-	// now it will not lend it
-	l1.lendBook(3, "Tomek");
-	// info about the book
-	l1.printInformation(3);
-	// info has changed
-	l1.printAllBooks();
-	// removing a book
-	l1.removeBook(4);
-	l1.printAllBooks();
-	// all the books by Adam Mickiewicz
-	l1.searchBooks("*", "Adam Mickiewicz", "*");
-	l1.addBook("Dziennik 1954", "Leopold Tyrmand", 1990);
-	
-}
 	
 }

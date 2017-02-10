@@ -6,9 +6,9 @@ import org.junit.Test;
 
 import com.example.mylibrary.Library;
 
-public class LibraryTest {
+class LibraryTest {
 
-	public void setup(Library l1){
+	private void setup(Library l1){
 		// adding few books to the library so we can test it
 		l1.addBook("Lalka", "Boleslaw Prus", 1890);
 		l1.addBook("Ogniem i mieczem", "Henryk Sienkiewicz", 1900);
@@ -19,7 +19,7 @@ public class LibraryTest {
 	}
 	
 	@Test
-	public void testLibrary() {
+	private void testLibrary() {
 		Library l1 = new Library();
 		// testing if the new Library has no books in it
 		assertEquals(l1.books.size(),0);
@@ -27,7 +27,7 @@ public class LibraryTest {
 
 
 	@Test
-	public void testAddBook() {
+	private void testAddBook() {
 		Library l1 = new Library();
 		setup(l1);
 		assertEquals(6,l1.books.size());
@@ -37,11 +37,11 @@ public class LibraryTest {
 	}
 
 	@Test
-	public void testRemoveBook() {
+	private void testRemoveBook() {
 		Library l1 = new Library();
 		setup(l1);
 		assertEquals(6,l1.books.size());
-		l1.removeBook(l1.books.get(4).id);
+		l1.removeBook(l1.books.get(4).getId());
 		// after removing a book the size of the library should be smaller by one
 		assertEquals(5,l1.books.size());	
 	}
