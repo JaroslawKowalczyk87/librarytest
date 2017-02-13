@@ -16,7 +16,7 @@ public class BookTest {
 		assertEquals("Boleslaw Prus", book.getAuthor());
 		assertEquals(Integer.valueOf(1890), book.getYear());
 		// newly created book should be available and not lent to anyone
-		assertEquals(null, book.getBorrowedBy());
+		assertEquals(null, book.getLendTo());
 	}
 
 }

@@ -18,8 +18,7 @@ public class Library {
 	}
 
 	public void addBook(String title, String author, Integer year) {
-		Book book = new Book(title, author, year);
-		books.add(book);
+		books.add(new Book(title, author, year));
 		System.out.println("You have added a book: " + title + " by " + author);
 	}
 
@@ -44,15 +43,15 @@ public class Library {
 		int tick = 0;
 		for (Book book : books) {
 			if (book.getId() == id){
-				if (book.getBorrowedBy() == null){
-					book.setBorrowedBy(p);
-					System.out.println(book.getBorrowedBy() + " has borrowed the book with id" + id);
+				if (book.getLendTo() == null){
+					book.setLendTo(p);
+					System.out.println(book.getLendTo() + " has borrowed the book with id" + id);
 					tick = 1;
 				}
 				else {
 					tick = 1;
 					System.out.println("Sorry, the book is already lent to " 
-				+ book.getBorrowedBy());
+				+ book.getLendTo());
 				}
 			}
 		}
@@ -65,7 +64,7 @@ public class Library {
 
 	// this function can print out the details of books on any book list
 	// we'll use it in few further functions
-	private void printBookList(ArrayList<Book> list){
+	private void printBooks(ArrayList<Book> list){
 		for (Book book: list){
 			System.out.println("Title: " + book.getTitle() + ", Author: " + book.getAuthor() +
 			", Year: " + book.getYear() + ", Availability: " + book.isAvailable());
@@ -73,24 +72,24 @@ public class Library {
 	}	
 
 	public void printBookInformation(Integer id){
-		ArrayList<Book> searchedBook = new ArrayList<Book>();
+		ArrayList<Book> bookToPrint = new ArrayList<Book>();
 		for (Book book : books) {
 			if (book.getId() == id){
-				searchedBook.add(book);
+				bookToPrint.add(book);
 				// ID is distinct, so we can break the loop,
 				// because the list will always have no more than one element
 				break;
 			}
 		}
 		System.out.println("Info about a book with id " + id);
-		printBookList(searchedBook);
+		printBooks(bookToPrint);
 	}
 
 	public void printAllBooks(){
 		ArrayList<Book> availableBooks = new ArrayList<Book>();
 		ArrayList<Book> lentBooks = new ArrayList<Book>();
 		for (Book book : this.books) {
-			if (book.getBorrowedBy() == null){
+			if (book.getLendTo() == null){
 				availableBooks.add(book);
 			}
 			else{
@@ -98,10 +97,10 @@ public class Library {
 			}
 		}
 		System.out.println((availableBooks.size() + " book(s) available:"));
-		printBookList(availableBooks);
+		printBooks(availableBooks);
 
 		System.out.println((lentBooks.size() + " book(s) lent:"));
-		printBookList(lentBooks);
+		printBooks(lentBooks);
 	}
 	
 	public void searchBooks(String title, String author, String year) {
@@ -145,7 +144,7 @@ public class Library {
 			System.out.println("No books that meet the criteria.");
 		} else {
 			System.out.println("Books that meet the criteria:");
-			printBookList(matchingBooks);
+			printBooks(matchingBooks);
 		}
 	}
 
