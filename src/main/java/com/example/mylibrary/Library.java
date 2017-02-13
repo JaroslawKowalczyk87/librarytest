@@ -9,38 +9,34 @@ public class Library {
 	private static int idCounter = 0;
 	
 	public Library() {
-		// creating an empty library, with no books
 		books = new ArrayList<Book>();
 	}
-	
-	// incrementing counter and giving the incremented value as an ID
-	static Integer getNewID() {
+
+	static Integer getUniqueID() {
 		idCounter++;
 		return idCounter;
 	}
-	
-	// adding a book to the books list
+
 	public void addBook(String title, String author, Integer year) {
-		Book b1 = new Book(title, author, year);
-		books.add(b1);
+		Book book = new Book(title, author, year);
+		books.add(book);
 		System.out.println("You have added a book: " + title + " by " + author);
 	}
-	
-	// removing a book given its id
+
 	public void removeBook(Integer id){
 		// I cannot remove the elements of the list I'm iterating through
 		// so I'm creating a list of the elements to remove
-		ArrayList<Book> books2 = new ArrayList<Book>();
+		ArrayList<Book> bookToRemove = new ArrayList<Book>();
 		for (Book book : books) {
 			if (book.getId() == id){
-				books2.add(book);
+				bookToRemove.add(book);
 				// ID is distinct, so we can break the loop,
 				// because the list will always have no more than one element
 				break;
 			}
 		}
-		books.removeAll(books2);
-		System.out.println("You have removed a book with id" + id);
+		books.removeAll(bookToRemove);
+		System.out.println("You have removed a book with id " + id);
 	}
 	
 	public void lendBook(Integer id, String p){
@@ -48,16 +44,15 @@ public class Library {
 		int tick = 0;
 		for (Book book : books) {
 			if (book.getId() == id){
-				if (book.getReader() == null){
-					book.setReader(p);
-					System.out.println(book.getReader() + " has borrowed the book with id" + id);
+				if (book.getBorrowedBy() == null){
+					book.setBorrowedBy(p);
+					System.out.println(book.getBorrowedBy() + " has borrowed the book with id" + id);
 					tick = 1;
 				}
-				// if the book is already lent to someone, the message is shown
 				else {
 					tick = 1;
 					System.out.println("Sorry, the book is already lent to " 
-				+ book.getReader());
+				+ book.getBorrowedBy());
 				}
 			}
 		}
@@ -76,92 +71,81 @@ public class Library {
 			", Year: " + book.getYear() + ", Availability: " + book.isAvailable());
 		}
 	}	
-	
-	// function that displays the details of a book given its id
-	public void printInformation(Integer id){
-		ArrayList<Book> books2 = new ArrayList<Book>();
+
+	public void printBookInformation(Integer id){
+		ArrayList<Book> searchedBook = new ArrayList<Book>();
 		for (Book book : books) {
 			if (book.getId() == id){
-				books2.add(book);
+				searchedBook.add(book);
 				// ID is distinct, so we can break the loop,
 				// because the list will always have no more than one element
 				break;
 			}
 		}
 		System.out.println("Info about a book with id " + id);
-		printBookList(books2);
+		printBookList(searchedBook);
 	}
-	
-	// function that displays the details of all the books in the library
+
 	public void printAllBooks(){
-		// we'll have two lists: available books and the books that are lent
-		ArrayList<Book> booksaval = new ArrayList<Book>();
-		ArrayList<Book> bookslent = new ArrayList<Book>();
+		ArrayList<Book> availableBooks = new ArrayList<Book>();
+		ArrayList<Book> lentBooks = new ArrayList<Book>();
 		for (Book book : this.books) {
-			if (book.getReader() == null){
-				booksaval.add(book);
+			if (book.getBorrowedBy() == null){
+				availableBooks.add(book);
 			}
 			else{
-				bookslent.add(book);
+				lentBooks.add(book);
 			}
 		}
-		// printing out the available books
-		System.out.println((booksaval.size() + " book(s) available:"));
-		printBookList(booksaval);
-		// Printing out the lent books
-		System.out.println((bookslent.size() + " book(s) lent:"));
-		printBookList(bookslent);
+		System.out.println((availableBooks.size() + " book(s) available:"));
+		printBookList(availableBooks);
+
+		System.out.println((lentBooks.size() + " book(s) lent:"));
+		printBookList(lentBooks);
 	}
 	
 	public void searchBooks(String title, String author, String year) {
-		ArrayList<Book> books2 = new ArrayList<Book>();
-		// creating a list on which we'll gather all the books that fail to meet
-		// at least one search criterium
-		ArrayList<Book> bookstoremove = new ArrayList<Book>();
-		//copying a list of all books from which we'll delete the books that
-		//don't match the search criteria
-		books2 = this.books;
+		ArrayList<Book> matchingBooks = new ArrayList<Book>(this.books);
+		ArrayList<Book> notMatchingBooks = new ArrayList<Book>();
+
 
 		// a star is given as an argument, when the user doesn't want to search
 		// using that field (e.g. is interested only in year, not in the author
 		if (title != "*") {
-			// we're searching thorugh the books to see, if there are any that
-			// fail to meet the criteria
-			for (Book book : books2) {
+			for (Book book : matchingBooks) {
 				if (book.getTitle() != title) {
-					bookstoremove.add(book);
+					notMatchingBooks.add(book);
 				}
 			}
-			books2.removeAll(bookstoremove);
+			matchingBooks.removeAll(notMatchingBooks);
 		}
 
 		if (author != "*") {
-			for (Book book : books2) {
+			for (Book book : matchingBooks) {
 				if (book.getAuthor() != author) {
-					bookstoremove.add(book);
+					notMatchingBooks.add(book);
 				}
 			}
 			// I'm removing the books three times, because that saves us from
 			// going through the whole list few times
-			books2.removeAll(bookstoremove);
+			matchingBooks.removeAll(notMatchingBooks);
 		}
 
 		if (year != "*") {
-			for (Book book : books2) {
+			for (Book book : matchingBooks) {
 				// I have to take the argument as a string, so the star can be used
 				if (book.getYear() != Integer.parseInt(year)) {
-					bookstoremove.add(book);
+					notMatchingBooks.add(book);
 				}
 			}
-			books2.removeAll(bookstoremove);
+			matchingBooks.removeAll(notMatchingBooks);
 		}
-		// printing out the books that meet the search criteria
-		// or displaying appropriate message, when no books where found
-		if (books2.size() == 0) {
+
+		if (matchingBooks.size() == 0) {
 			System.out.println("No books that meet the criteria.");
 		} else {
 			System.out.println("Books that meet the criteria:");
-			printBookList(books2);
+			printBookList(matchingBooks);
 		}
 	}
 

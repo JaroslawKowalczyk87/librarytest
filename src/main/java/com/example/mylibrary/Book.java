@@ -5,29 +5,25 @@ class Book {
 	private String title;
 	private String author;
 	private Integer year;
-	// person who has borrowed the book
-	private String reader;
+	private String borrowedBy;
 
 
 
 	Book(String title, String author, Integer year) {
-		// id should be unique within the library
-		this.id = Library.getNewID();
+		this.id = Library.getUniqueID();
 		this.title = title;
 		this.author = author;
 		this.year = year;
 		// when book is created, it's not lent to anyone
-		this.reader = null;
+		this.borrowedBy = null;
 	}
 
-	
-	// giving the information, if the book is available or lent to somebody
 	String isAvailable() {
-		if (this.reader == null) {
+		if (this.borrowedBy == null) {
 			return "available";
 		}
 		else {
-			return "lent to " + this.reader;
+			return "lent to " + this.borrowedBy;
 		}
 	}
 
@@ -47,11 +43,11 @@ class Book {
 		return year;
 	}
 
-	String getReader() {
-		return reader;
+	String getBorrowedBy() {
+		return borrowedBy;
 	}
 
-	void setReader(String reader) {
-		this.reader = reader;
+	void setBorrowedBy(String reader) {
+		this.borrowedBy = reader;
 	}
 }

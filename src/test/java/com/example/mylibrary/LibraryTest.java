@@ -4,46 +4,44 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.example.mylibrary.Library;
-
 public class LibraryTest {
 
-	void setup(Library l1){
+	void setup(Library library){
 		// adding few books to the library so we can test it
-		l1.addBook("Lalka", "Boleslaw Prus", 1890);
-		l1.addBook("Ogniem i mieczem", "Henryk Sienkiewicz", 1900);
-		l1.addBook("Nad Niemnem", "Eliza Orzeszkowa", 1895);
-		l1.addBook("Morfina", "Szczepan Twardoch", 2015);
-		l1.addBook("Ballady i Romanse", "Adam Mickiewicz", 1822);
-		l1.addBook("Pan Tadeusz", "Adam Mickiewicz", 1830);
+		library.addBook("Lalka", "Boleslaw Prus", 1890);
+		library.addBook("Ogniem i mieczem", "Henryk Sienkiewicz", 1900);
+		library.addBook("Nad Niemnem", "Eliza Orzeszkowa", 1895);
+		library.addBook("Morfina", "Szczepan Twardoch", 2015);
+		library.addBook("Ballady i Romanse", "Adam Mickiewicz", 1822);
+		library.addBook("Pan Tadeusz", "Adam Mickiewicz", 1830);
 	}
 	
 	@Test
 	public void testLibrary() {
-		Library l1 = new Library();
+		Library library = new Library();
 		// testing if the new Library has no books in it
-		assertEquals(l1.getBooks().size(),0);
+		assertEquals(0,library.getBooks().size());
 	}
 
 
 	@Test
 	public void testAddBook() {
-		Library l1 = new Library();
-		setup(l1);
-		assertEquals(6, l1.getBooks().size());
-		l1.addBook("Dziennik 1954", "Leopold Tyrmand", 1989);
+		Library library = new Library();
+		setup(library);
+		assertEquals(6, library.getBooks().size());
+		library.addBook("Dziennik 1954", "Leopold Tyrmand", 1989);
 		// after adding a book the size of the library should be bigger by one
-		assertEquals(7, l1.getBooks().size());
+		assertEquals(7, library.getBooks().size());
 	}
 
 	@Test
 	public void testRemoveBook() {
-		Library l1 = new Library();
-		setup(l1);
-		assertEquals(6, l1.getBooks().size());
-		l1.removeBook(l1.getBooks().get(4).getId());
+		Library library = new Library();
+		setup(library);
+		assertEquals(6, library.getBooks().size());
+		library.removeBook(library.getBooks().get(4).getId());
 		// after removing a book the size of the library should be smaller by one
-		assertEquals(5, l1.getBooks().size());
+		assertEquals(5, library.getBooks().size());
 	}
 
 

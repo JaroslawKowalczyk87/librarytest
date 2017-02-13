@@ -9,31 +9,32 @@ public class Client {
     public static void main(String[] args) {
         // we'll show how the program works
         // creating a library
-        Library l1 = new Library();
+        Library library = new Library();
         // adding a few books
-        l1.addBook("Lalka", "Boleslaw Prus", 1890);
-        l1.addBook("Ogniem i mieczem", "Henryk Sienkiewicz", 1900);
-        l1.addBook("Nad Niemnem", "Eliza Orzeszkowa", 1895);
+        library.addBook("Lalka", "Boleslaw Prus", 1890);
+        library.addBook("Ogniem i mieczem", "Henryk Sienkiewicz", 1900);
+        library.addBook("Nad Niemnem", "Eliza Orzeszkowa", 1895);
         // showing how it looks
-        l1.printAllBooks();
-        l1.addBook("Morfina", "Szczepan Twardoch", 2015);
-        l1.addBook("Ballady i Romanse", "Adam Mickiewicz", 1822);
-        l1.addBook("Pan Tadeusz", "Adam Mickiewicz", 1830);
+        library.printAllBooks();
+        library.addBook("Morfina", "Szczepan Twardoch", 2015);
+        library.addBook("Ballady i Romanse", "Adam Mickiewicz", 1822);
+        library.addBook("Pan Tadeusz", "Adam Mickiewicz", 1830);
         // and now
-        l1.printAllBooks();
-        l1.lendBook(3, "Pawel");
+        library.printAllBooks();
+        library.lendBook(3, "Pawel");
         // now it will not lend it
-        l1.lendBook(3, "Tomek");
+        library.lendBook(3, "Tomek");
         // info about the book
-        l1.printInformation(3);
+        library.printBookInformation(3);
         // info has changed
-        l1.printAllBooks();
+        library.printAllBooks();
         // removing a book
-        l1.removeBook(4);
-        l1.printAllBooks();
+        library.removeBook(4);
+        library.printAllBooks();
         // all the books by Adam Mickiewicz
-        l1.searchBooks("*", "Adam Mickiewicz", "*");
-        l1.addBook("Dziennik 1954", "Leopold Tyrmand", 1990);
+        library.searchBooks("*", "Adam Mickiewicz", "*");
+        library.addBook("Dziennik 1954", "Leopold Tyrmand", 1990);
+        library.printAllBooks();
 
     }
 }
