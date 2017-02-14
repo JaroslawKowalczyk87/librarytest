@@ -42,15 +42,15 @@ public class Library {
 		int tick = 0;
 		for (Book book : books) {
 			if (book.getId() == id){
-				if (book.getLendTo() == null){
-					book.setLendTo(p);
-					System.out.println(book.getLendTo() + " has borrowed the book with id" + id);
+				if (book.getLentTo() == null){
+					book.setLentTo(p);
+					System.out.println(book.getLentTo() + " has borrowed the book with id" + id);
 					tick = 1;
 				}
 				else {
 					tick = 1;
 					System.out.println("Sorry, the book is already lent to " 
-				+ book.getLendTo());
+				+ book.getLentTo());
 				}
 			}
 		}
@@ -70,6 +70,7 @@ public class Library {
 		}
 	}
 
+	// printing info about one book
 	private void printBooks(Book book){
 		List<Book> booksToPrint = new ArrayList<>();
 		booksToPrint.add(book);
@@ -94,7 +95,7 @@ public class Library {
 		List<Book> availableBooks = new ArrayList<Book>();
 		List<Book> lentBooks = new ArrayList<Book>();
 		for (Book book : this.books) {
-			if (book.getLendTo() == null){
+			if (book.getLentTo() == null){
 				availableBooks.add(book);
 			}
 			else{

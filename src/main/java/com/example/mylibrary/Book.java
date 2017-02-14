@@ -5,7 +5,7 @@ class Book {
 	private String title;
 	private String author;
 	private Integer year;
-	private String lendTo;
+	private String lentTo;
 
 
 
@@ -15,15 +15,15 @@ class Book {
 		this.author = author;
 		this.year = year;
 		// when book is created, it's not lent to anyone
-		this.lendTo = null;
+		this.lentTo = null;
 	}
 
 	String isAvailable() {
-		if (this.lendTo == null) {
+		if (this.lentTo == null) {
 			return "available";
 		}
 		else {
-			return "lent to " + this.lendTo;
+			return "lent to " + this.lentTo;
 		}
 	}
 
@@ -43,11 +43,11 @@ class Book {
 		return year;
 	}
 
-	String getLendTo() {
-		return lendTo;
+	String getLentTo() {
+		return lentTo;
 	}
 
-	void setLendTo(String reader) {
-		this.lendTo = reader;
+	void setLentTo(String reader) {
+		this.lentTo = reader;
 	}
 }
