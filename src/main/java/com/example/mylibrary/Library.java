@@ -1,11 +1,12 @@
 package com.example.mylibrary;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class Library {
 
 	// "books" field is the list of all the books in our library
-	private ArrayList<Book> books;
+	private List<Book> books;
 	private static int idCounter = 0;
 	
 	public Library() {
@@ -23,18 +24,16 @@ public class Library {
 	}
 
 	public void removeBook(Integer id){
-		// I cannot remove the elements of the list I'm iterating through
-		// so I'm creating a list of the elements to remove
-		ArrayList<Book> bookToRemove = new ArrayList<Book>();
+		Book bookToRemove = null;
 		for (Book book : books) {
 			if (book.getId() == id){
-				bookToRemove.add(book);
+				bookToRemove = book;
 				// ID is distinct, so we can break the loop,
 				// because the list will always have no more than one element
 				break;
 			}
 		}
-		books.removeAll(bookToRemove);
+		books.remove(bookToRemove);
 		System.out.println("You have removed a book with id " + id);
 	}
 	
@@ -64,18 +63,24 @@ public class Library {
 
 	// this function can print out the details of books on any book list
 	// we'll use it in few further functions
-	private void printBooks(ArrayList<Book> list){
-		for (Book book: list){
+	private void printBooks(List<Book> books){
+		for (Book book: books){
 			System.out.println("Title: " + book.getTitle() + ", Author: " + book.getAuthor() +
 			", Year: " + book.getYear() + ", Availability: " + book.isAvailable());
 		}
-	}	
+	}
+
+	private void printBooks(Book book){
+		List<Book> booksToPrint = new ArrayList<>();
+		booksToPrint.add(book);
+		printBooks(booksToPrint);
+	}
 
 	public void printBookInformation(Integer id){
-		ArrayList<Book> bookToPrint = new ArrayList<Book>();
+		Book bookToPrint = null;
 		for (Book book : books) {
 			if (book.getId() == id){
-				bookToPrint.add(book);
+				bookToPrint = book;
 				// ID is distinct, so we can break the loop,
 				// because the list will always have no more than one element
 				break;
@@ -86,8 +91,8 @@ public class Library {
 	}
 
 	public void printAllBooks(){
-		ArrayList<Book> availableBooks = new ArrayList<Book>();
-		ArrayList<Book> lentBooks = new ArrayList<Book>();
+		List<Book> availableBooks = new ArrayList<Book>();
+		List<Book> lentBooks = new ArrayList<Book>();
 		for (Book book : this.books) {
 			if (book.getLendTo() == null){
 				availableBooks.add(book);
@@ -104,8 +109,8 @@ public class Library {
 	}
 	
 	public void searchBooks(String title, String author, String year) {
-		ArrayList<Book> matchingBooks = new ArrayList<Book>(this.books);
-		ArrayList<Book> notMatchingBooks = new ArrayList<Book>();
+		List<Book> matchingBooks = new ArrayList<Book>(this.books);
+		List<Book> notMatchingBooks = new ArrayList<Book>();
 
 
 		// a star is given as an argument, when the user doesn't want to search
@@ -148,7 +153,7 @@ public class Library {
 		}
 	}
 
-	public ArrayList<Book> getBooks() {
+	public List<Book> getBooks() {
 		return books;
 	}
 }
