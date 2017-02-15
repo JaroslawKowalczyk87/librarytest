@@ -9,8 +9,8 @@ class Book {
 
 
 
-	Book(String title, String author, Integer year) {
-		this.id = Library.getUniqueID();
+	Book(String title, String author, Integer year, Integer id) {
+		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.year = year;

@@ -6,20 +6,11 @@ import java.util.ArrayList;
 public class Library {
 
 	// "books" field is the list of all the books in our library
-	private List<Book> books;
-	private static int idCounter = 0;
-	
-	public Library() {
-		books = new ArrayList<Book>();
-	}
-
-	static Integer getUniqueID() {
-		idCounter++;
-		return idCounter;
-	}
+	private List<Book> books = new ArrayList<Book>();
+	final IdGenerator idGenerator = new IdGenerator();
 
 	public void addBook(String title, String author, Integer year) {
-		books.add(new Book(title, author, year));
+		books.add(new Book(title, author, year, idGenerator.getUniqueId()));
 		System.out.println("You have added a book: " + title + " by " + author);
 	}
 

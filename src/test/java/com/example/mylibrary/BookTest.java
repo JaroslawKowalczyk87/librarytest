@@ -9,7 +9,7 @@ public class BookTest {
 	// testing the creator of the book
 	@Test
 	public void testBook() {
-		Book book = new Book("Lalka", "Boleslaw Prus", 1890);
+		Book book = new Book("Lalka", "Boleslaw Prus", 1890, 1);
 		assertEquals("Lalka", book.getTitle());
 		assertEquals("Boleslaw Prus", book.getAuthor());
 		assertEquals(Integer.valueOf(1890), book.getYear());
