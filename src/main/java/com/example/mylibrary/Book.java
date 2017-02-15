@@ -18,7 +18,7 @@ class Book {
 		this.lentTo = null;
 	}
 
-	String isAvailable() {
+	String availability() {
 		if (this.lentTo == null) {
 			return "available";
 		}

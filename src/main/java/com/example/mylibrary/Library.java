@@ -61,7 +61,7 @@ public class Library {
 	private void printBooks(List<Book> books){
 		for (Book book: books){
 			System.out.println("Title: " + book.getTitle() + ", Author: " + book.getAuthor() +
-			", Year: " + book.getYear() + ", Availability: " + book.isAvailable());
+			", Year: " + book.getYear() + ", Availability: " + book.availability());
 		}
 	}
 
