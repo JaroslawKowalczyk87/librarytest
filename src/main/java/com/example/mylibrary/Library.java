@@ -107,18 +107,18 @@ public class Library {
 
 		// a star is given as an argument, when the user doesn't want to search
 		// using that field (e.g. is interested only in year, not in the author
-		if (title != "*") {
+		if (!(title.equals("*"))) {
 			for (Book book : matchingBooks) {
-				if (book.getTitle() != title) {
+				if (!(book.getTitle().equals(title))) {
 					notMatchingBooks.add(book);
 				}
 			}
 			matchingBooks.removeAll(notMatchingBooks);
 		}
 
-		if (author != "*") {
+		if (!(author.equals("*"))) {
 			for (Book book : matchingBooks) {
-				if (book.getAuthor() != author) {
+				if (!(book.getAuthor().equals(author))) {
 					notMatchingBooks.add(book);
 				}
 			}
@@ -127,10 +127,10 @@ public class Library {
 			matchingBooks.removeAll(notMatchingBooks);
 		}
 
-		if (year != "*") {
+		if (!(year.equals("*"))) {
 			for (Book book : matchingBooks) {
 				// I have to take the argument as a string, so the star can be used
-				if (book.getYear() != Integer.parseInt(year)) {
+				if (!(book.getYear().equals(Integer.parseInt(year)))) {
 					notMatchingBooks.add(book);
 				}
 			}
