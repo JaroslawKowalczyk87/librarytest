@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class LibraryTest {
 
-	void setup(Library library){
+	private void setup(Library library){
 		// adding few books to the library so we can test it
 		library.addBook("Lalka", "Boleslaw Prus", 1890);
 		library.addBook("Ogniem i mieczem", "Henryk Sienkiewicz", 1900);

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Library {
 
 	// "books" field is the list of all the books in our library
-	private List<Book> books = new ArrayList<Book>();
-	final IdGenerator idGenerator;
+	private List<Book> books = new ArrayList<>();
+	private final IdGenerator idGenerator;
 
 	public Library(IdGenerator idGenerator){
 		this.idGenerator = idGenerator;
@@ -87,8 +87,8 @@ public class Library {
 	}
 
 	public void printAllBooks(){
-		List<Book> availableBooks = new ArrayList<Book>();
-		List<Book> lentBooks = new ArrayList<Book>();
+		List<Book> availableBooks = new ArrayList<>();
+		List<Book> lentBooks = new ArrayList<>();
 		for (Book book : this.books) {
 			if (book.getLentTo() == null){
 				availableBooks.add(book);
@@ -105,8 +105,8 @@ public class Library {
 	}
 	
 	public void searchBooks(String title, String author, String year) {
-		List<Book> matchingBooks = new ArrayList<Book>(this.books);
-		List<Book> notMatchingBooks = new ArrayList<Book>();
+		List<Book> matchingBooks = new ArrayList<>(this.books);
+		List<Book> notMatchingBooks = new ArrayList<>();
 
 
 		// a star is given as an argument, when the user doesn't want to search
