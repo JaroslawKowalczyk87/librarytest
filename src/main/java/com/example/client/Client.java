@@ -1,5 +1,6 @@
 package com.example.client;
 
+import com.example.mylibrary.IdGenerator;
 import com.example.mylibrary.Library;
 
 /**
@@ -9,7 +10,7 @@ public class Client {
     public static void main(String[] args) {
         // we'll show how the program works
         // creating a library
-        Library library = new Library();
+        Library library = new Library(new IdGenerator());
         // adding a few books
         library.addBook("Lalka", "Boleslaw Prus", 1890);
         library.addBook("Ogniem i mieczem", "Henryk Sienkiewicz", 1900);

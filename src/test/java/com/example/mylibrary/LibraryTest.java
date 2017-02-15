@@ -18,7 +18,7 @@ public class LibraryTest {
 	
 	@Test
 	public void testLibrary() {
-		Library library = new Library();
+		Library library = new Library(new IdGenerator());
 		// testing if the new Library has no books in it
 		assertEquals(0,library.getBooks().size());
 	}
@@ -26,7 +26,7 @@ public class LibraryTest {
 
 	@Test
 	public void testAddBook() {
-		Library library = new Library();
+		Library library = new Library(new IdGenerator());
 		setup(library);
 		assertEquals(6, library.getBooks().size());
 		library.addBook("Dziennik 1954", "Leopold Tyrmand", 1989);
@@ -36,7 +36,7 @@ public class LibraryTest {
 
 	@Test
 	public void testRemoveBook() {
-		Library library = new Library();
+		Library library = new Library(new IdGenerator());
 		setup(library);
 		assertEquals(6, library.getBooks().size());
 		library.removeBook(library.getBooks().get(4).getId());

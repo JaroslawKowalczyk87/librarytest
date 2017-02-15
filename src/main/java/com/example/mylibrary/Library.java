@@ -9,8 +9,8 @@ public class Library {
 	private List<Book> books = new ArrayList<Book>();
 	final IdGenerator idGenerator;
 
-	public Library(){
-		this.idGenerator = new IdGenerator();
+	public Library(IdGenerator idGenerator){
+		this.idGenerator = idGenerator;
 	}
 
 	public void addBook(String title, String author, Integer year) {
