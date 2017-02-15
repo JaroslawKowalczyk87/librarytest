@@ -47,7 +47,7 @@ class Book {
 		return lentTo;
 	}
 
-	void setLentTo(String reader) {
+	void lendTo(String reader) {
 		this.lentTo = reader;
 	}
 }

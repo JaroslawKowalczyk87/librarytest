@@ -7,7 +7,11 @@ public class Library {
 
 	// "books" field is the list of all the books in our library
 	private List<Book> books = new ArrayList<Book>();
-	final IdGenerator idGenerator = new IdGenerator();
+	final IdGenerator idGenerator;
+
+	public Library(){
+		this.idGenerator = new IdGenerator();
+	}
 
 	public void addBook(String title, String author, Integer year) {
 		books.add(new Book(title, author, year, idGenerator.getUniqueId()));
@@ -34,7 +38,7 @@ public class Library {
 		for (Book book : books) {
 			if (book.getId().equals(id)){
 				if (book.getLentTo() == null){
-					book.setLentTo(p);
+					book.lendTo(p);
 					System.out.println(book.getLentTo() + " has borrowed the book with id" + id);
 					tick = 1;
 				}
