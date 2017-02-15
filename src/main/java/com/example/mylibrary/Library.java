@@ -17,7 +17,7 @@ public class Library {
 	public void removeBook(Integer id){
 		Book bookToRemove = null;
 		for (Book book : books) {
-			if (book.getId() == id){
+			if (book.getId().equals(id)){
 				bookToRemove = book;
 				// ID is distinct, so we can break the loop,
 				// because the list will always have no more than one element
@@ -32,7 +32,7 @@ public class Library {
 		// the tick value will change, if there is a book with this id
 		int tick = 0;
 		for (Book book : books) {
-			if (book.getId() == id){
+			if (book.getId().equals(id)){
 				if (book.getLentTo() == null){
 					book.setLentTo(p);
 					System.out.println(book.getLentTo() + " has borrowed the book with id" + id);
@@ -71,7 +71,7 @@ public class Library {
 	public void printBookInformation(Integer id){
 		Book bookToPrint = null;
 		for (Book book : books) {
-			if (book.getId() == id){
+			if (book.getId().equals(id)){
 				bookToPrint = book;
 				// ID is distinct, so we can break the loop,
 				// because the list will always have no more than one element
