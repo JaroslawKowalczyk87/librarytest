@@ -7,7 +7,7 @@ package com.example.mylibrary;
  * Created by a591566 on 2017-02-15.
  */
 class IdGenerator {
-    Integer idCounter = 0;
+     private Integer idCounter = 0;
 
     Integer getUniqueId(){
         idCounter++;
