@@ -6,11 +6,13 @@ import java.util.ArrayList;
 public class Library {
 
 	// "books" field is the list of all the books in our library
-	private List<Book> books = new ArrayList<>();
+	List<Book> books = new ArrayList<>();
 	private final IdGenerator idGenerator;
+	public final BookPrinter bookPrinter;
 
-	public Library(IdGenerator idGenerator){
+	public Library(IdGenerator idGenerator, BookPrinter bookPrinter){
 		this.idGenerator = idGenerator;
+		this.bookPrinter = bookPrinter;
 	}
 
 	public void addBook(String title, String author, Integer year) {
@@ -56,55 +58,8 @@ public class Library {
 		}
 	}
 
-	// this function can print out the details of books on any book list
-	// we'll use it in few further functions
-	private void printBooks(List<Book> books){
-		for (Book book: books){
-			System.out.println("Title: " + book.getTitle() + ", Author: " + book.getAuthor() +
-			", Year: " + book.getYear() + ", Availability: " + book.availability());
-		}
-	}
-
-	// printing info about one book
-	private void printBooks(Book book){
-		List<Book> booksToPrint = new ArrayList<>();
-		booksToPrint.add(book);
-		printBooks(booksToPrint);
-	}
-
-	public void printBookInformation(Integer id){
-		Book bookToPrint = null;
-		for (Book book : books) {
-			if (book.getId().equals(id)){
-				bookToPrint = book;
-				// ID is distinct, so we can break the loop,
-				// because the list will always have no more than one element
-				break;
-			}
-		}
-		System.out.println("Info about a book with id " + id);
-		printBooks(bookToPrint);
-	}
-
-	public void printAllBooks(){
-		List<Book> availableBooks = new ArrayList<>();
-		List<Book> lentBooks = new ArrayList<>();
-		for (Book book : this.books) {
-			if (book.getLentTo() == null){
-				availableBooks.add(book);
-			}
-			else{
-				lentBooks.add(book);
-			}
-		}
-		System.out.println((availableBooks.size() + " book(s) available:"));
-		printBooks(availableBooks);
-
-		System.out.println((lentBooks.size() + " book(s) lent:"));
-		printBooks(lentBooks);
-	}
 	
-	public void searchBooks(String title, String author, String year) {
+	public List<Book> searchBooks(String title, String author, String year) {
 		List<Book> matchingBooks = new ArrayList<>(this.books);
 		List<Book> notMatchingBooks = new ArrayList<>();
 
@@ -140,13 +95,7 @@ public class Library {
 			}
 			matchingBooks.removeAll(notMatchingBooks);
 		}
-
-		if (matchingBooks.size() == 0) {
-			System.out.println("No books that meet the criteria.");
-		} else {
-			System.out.println("Books that meet the criteria:");
-			printBooks(matchingBooks);
-		}
+		return matchingBooks;
 	}
 
 	public List<Book> getBooks() {
