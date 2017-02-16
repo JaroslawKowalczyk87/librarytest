@@ -28,7 +28,7 @@ public class Client {
         // now it will not lend it
         library.lendBook(3, "Tomek");
         // info about the book
-        bookPrinter.printBook(library.getSpecificBook(3));
+        bookPrinter.printBook(library.getBook(3));
         // info has changed
         bookPrinter.printAllBooks(library.getBooks());
         // removing a book

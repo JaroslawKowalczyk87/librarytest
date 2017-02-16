@@ -8,8 +8,6 @@ import java.util.List;
  */
 public class BookPrinter {
 
-    // this function can print out the details of books on any book list
-    // we'll use it in few further functions
     public void printBooks(List<Book> books){
         for (Book book: books){
             System.out.println("Title: " + book.getTitle() + ", Author: " + book.getAuthor() +
@@ -17,7 +15,6 @@ public class BookPrinter {
         }
     }
 
-    // printing info about one book
     public void printBook(Book book){
         List<Book> bookToPrint = new ArrayList<>();
         bookToPrint.add(book);

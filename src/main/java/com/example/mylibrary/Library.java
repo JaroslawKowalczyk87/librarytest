@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Library {
 
 	// "books" field is the list of all the books in our library
-	List<Book> books = new ArrayList<>();
+	private List<Book> books = new ArrayList<>();
 	private final IdGenerator idGenerator;
 
 	public Library(IdGenerator idGenerator){
@@ -95,7 +95,7 @@ public class Library {
 		return matchingBooks;
 	}
 
-	public Book getSpecificBook (Integer id){
+	public Book getBook (Integer id){
 		Book specificBook = null;
 		for (Book book : this.books) {
 			if (book.getId().equals(id)){
