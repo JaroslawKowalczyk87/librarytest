@@ -18,7 +18,7 @@ public class BookPrinter {
     }
 
     // printing info about one book
-    void printBooks(Book book){
+    private void printBooks(Book book){
         List<Book> booksToPrint = new ArrayList<>();
         booksToPrint.add(book);
         printBooks(booksToPrint);
