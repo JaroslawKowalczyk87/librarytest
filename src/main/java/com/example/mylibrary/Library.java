@@ -8,11 +8,9 @@ public class Library {
 	// "books" field is the list of all the books in our library
 	List<Book> books = new ArrayList<>();
 	private final IdGenerator idGenerator;
-	public final BookPrinter bookPrinter;
 
-	public Library(IdGenerator idGenerator, BookPrinter bookPrinter){
+	public Library(IdGenerator idGenerator){
 		this.idGenerator = idGenerator;
-		this.bookPrinter = bookPrinter;
 	}
 
 	public void addBook(String title, String author, Integer year) {
@@ -57,7 +55,6 @@ public class Library {
 			System.out.println("Sorry, there is no book with such ID!");
 		}
 	}
-
 	
 	public List<Book> searchBooks(String title, String author, String year) {
 		List<Book> matchingBooks = new ArrayList<>(this.books);
@@ -96,6 +93,19 @@ public class Library {
 			matchingBooks.removeAll(notMatchingBooks);
 		}
 		return matchingBooks;
+	}
+
+	public Book getSpecificBook (Integer id){
+		Book specificBook = null;
+		for (Book book : this.books) {
+			if (book.getId().equals(id)){
+				specificBook = book;
+				// ID is distinct, so we can break the loop,
+				// because the list will always have no more than one element
+				break;
+			}
+		}
+		return specificBook;
 	}
 
 	public List<Book> getBooks() {

@@ -18,30 +18,17 @@ public class BookPrinter {
     }
 
     // printing info about one book
-    private void printBooks(Book book){
-        List<Book> booksToPrint = new ArrayList<>();
-        booksToPrint.add(book);
-        printBooks(booksToPrint);
-    }
-
-    public void printBookInformation(Library library, Integer id){
-        Book bookToPrint = null;
-        for (Book book : library.books) {
-            if (book.getId().equals(id)){
-                bookToPrint = book;
-                // ID is distinct, so we can break the loop,
-                // because the list will always have no more than one element
-                break;
-            }
-        }
-        System.out.println("Info about a book with id " + id);
+    public void printBook(Book book){
+        List<Book> bookToPrint = new ArrayList<>();
+        bookToPrint.add(book);
+        System.out.println("Info about a book with id " + book.getId());
         printBooks(bookToPrint);
     }
 
-    public void printAllBooks(Library library){
+    public void printAllBooks(List<Book> books){
         List<Book> availableBooks = new ArrayList<>();
         List<Book> lentBooks = new ArrayList<>();
-        for (Book book : library.books) {
+        for (Book book : books) {
             if (book.getLentTo() == null){
                 availableBooks.add(book);
             }
