@@ -2,6 +2,7 @@ package com.example.mylibrary;
 
 import java.util.List;
 import java.util.ArrayList;
+import com.example.mylibrary.ApplicationException;
 
 public class Library {
 
@@ -30,7 +31,7 @@ public class Library {
 			}
 		}
 		if (bookToRemove == null){
-			throw new RuntimeException("Removal not possible, no book with such ID.");
+			throw new ApplicationException("Removal not possible, no book with such ID.");
 		}
 		books.remove(bookToRemove);
 	}
@@ -46,7 +47,7 @@ public class Library {
 				}
 				else {
 					tick = 1;
-					throw new RuntimeException("Sorry, the book is already lent to "
+					throw new ApplicationException("Sorry, the book is already lent to "
 				+ book.getLentTo() +".");
 				}
 			}
@@ -54,7 +55,7 @@ public class Library {
 		// if the tick value is the same as in the beginning, 
 		// then there was no book with such ID, and that's the message I'm giving
 		if (tick == 0){
-			throw new RuntimeException("Lending not possible, there is no book with such ID.");
+			throw new ApplicationException("Lending not possible, there is no book with such ID.");
 		}
 	}
 	
