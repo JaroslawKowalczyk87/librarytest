@@ -13,9 +13,10 @@ public class Library {
 		this.idGenerator = idGenerator;
 	}
 
-	public void addBook(String title, String author, Integer year) {
-		books.add(new Book(title, author, year, idGenerator.getUniqueId()));
-		System.out.println("You have added a book: " + title + " by " + author);
+	public Integer addBook(String title, String author, Integer year) {
+		int id = idGenerator.getUniqueId();
+		books.add(new Book(title, author, year, id));
+		return id;
 	}
 
 	public void removeBook(Integer id){
@@ -28,8 +29,10 @@ public class Library {
 				break;
 			}
 		}
+		if (bookToRemove == null){
+			throw new RuntimeException("Removal not possible, no book with such ID.");
+		}
 		books.remove(bookToRemove);
-		System.out.println("You have removed a book with id " + id);
 	}
 	
 	public void lendBook(Integer id, String p){
@@ -39,20 +42,19 @@ public class Library {
 			if (book.getId().equals(id)){
 				if (book.getLentTo() == null){
 					book.lendTo(p);
-					System.out.println(book.getLentTo() + " has borrowed the book with id" + id);
 					tick = 1;
 				}
 				else {
 					tick = 1;
-					System.out.println("Sorry, the book is already lent to " 
-				+ book.getLentTo());
+					throw new RuntimeException("Sorry, the book is already lent to "
+				+ book.getLentTo() +".");
 				}
 			}
 		}
 		// if the tick value is the same as in the beginning, 
 		// then there was no book with such ID, and that's the message I'm giving
 		if (tick == 0){
-			System.out.println("Sorry, there is no book with such ID!");
+			throw new RuntimeException("Lending not possible, there is no book with such ID.");
 		}
 	}
 	

@@ -18,7 +18,6 @@ public class BookPrinter {
     public void printBook(Book book){
         List<Book> bookToPrint = new ArrayList<>();
         bookToPrint.add(book);
-        System.out.println("Info about a book with id " + book.getId());
         printBooks(bookToPrint);
     }
 
